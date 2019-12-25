@@ -1,7 +1,7 @@
 <template>
     <div class="centralize-content">
         <div class="calculator">
-            <h1 class="centralize-content text-light"><span id="span">Vue</span>Calculator</h1>
+            <Label />
             <div class="flex-row-around">
                 <Display />
             </div>
@@ -17,7 +17,7 @@
             </div>
             <div class="flex-row-around">
                 <Button number v-for="i of 3" :key="i" :value="i"/>
-                <Button operation value="/"/>
+                <Button operation value="+"/>
             </div>
             <div class="flex-row-around">
                 <Button number v-for="i of 3" :key="i+4" :value="i+3"/>
@@ -34,22 +34,21 @@
 </template>
 
 <script>
+import Label from './Label'
 import Button from './Button'
 import Display from './Display'
 
 export default {
     components: {
-        Button, Display
+        Button, Display, Label
     }, 
     
 }
 </script>
 
 <style scoped>
-    span#span{
-        color: #41b883;
-    }
-    .calculator{
+    div.calculator{
+        margin-top: 10px;
         display: flex;
         justify-content: space-around;
         flex-direction: column;

@@ -1,11 +1,25 @@
 <template>
     <div class="display">
-       Display de números
+       {{displayText}}
     </div>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            displayText: ''
+        }
+    },
+    updated() {
+        this.displayText+=this.newElement;
+    }
+}
+</script>
+
 <style scoped>
     .display{
+        height: 12px;
         font-family: monospace;
         font-size: 1.5rem;
         align-items: center;

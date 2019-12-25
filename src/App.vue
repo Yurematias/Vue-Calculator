@@ -1,13 +1,17 @@
 <template>
-    <Calculator />
+   <div>
+        <Calculator />
+        <Footer />
+   </div>
 </template>
 
 <script>
 import Calculator from './components/Calculator'
+import Footer from './components/Footer'
 
 export default {
     components: {
-        Calculator
+        Calculator, Footer
     }
 }
 </script>
@@ -16,6 +20,17 @@ export default {
 .centralize-content{
     display: flex;
     justify-content: center;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: gainsboro;
+}
+
+.flex-center-vertical{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .flex-row-around{
