@@ -1,15 +1,13 @@
 <template>
     <div class="display">
-       {{displayText}}
+       {{displayValue}}
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            displayText: ''
-        }
+    props: {
+        displayValue: String
     },
     updated() {
         this.displayText+=this.newElement;

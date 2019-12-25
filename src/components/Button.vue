@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <button :class="{operation, clear, number, symbol, result}" class="button">{{value}}</button>
-    </div>
+    <button :class="{operation, clear, number, symbol, result}" class="button">{{value}}</button>
 </template>
 
 <script>
