@@ -1,6 +1,6 @@
 <template>
     <div class="display">
-       {{displayValue}}
+       {{displayValueFormated}}
     </div>
 </template>
 
@@ -8,6 +8,11 @@
 export default {
     props: {
         displayValue: String
+    },
+    computed: {
+        displayValueFormated() {
+            return this.displayValue.replace('*','x');
+        }
     },
     updated() {
         this.displayText+=this.newElement;

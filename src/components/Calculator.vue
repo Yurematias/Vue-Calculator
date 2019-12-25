@@ -21,7 +21,7 @@
             </div>
             <div class="flex-row-around">
                 <Button number v-for="i of 3" :key="i+3" :value="i+3" v-on:click.native="addDigit(i+3)" />
-                <Button operation value="X" v-on:click.native="addDigit('X')" />
+                <Button operation value="x" v-on:click.native="addDigit('*')" />
             </div>
             <div class="flex-row-around">
                 <Button symbol value="%" v-on:click.native="addDigit('%')" />
@@ -44,6 +44,16 @@ export default {
             displayValue: '0'
         }
     },
+    beforeCreate() {
+        // adapting the split method to work with multiple separators
+        String.prototype.customSplit = function(...separators) {
+            let newString = this;
+            for(let i = 0; i < separators.length; i++) {
+                newString = newString.split(separators[i]).join(',');
+            }
+            return newString.split(',');
+        }
+    },
     components: {
         Button, Display, Label
     }, 
@@ -52,6 +62,14 @@ export default {
             this.displayValue = '0';
         },
         addDigit(value) {
+            if (value == '.') {
+                // using the split custom method that are created in beforeCreate lifecycle method
+                let values = this.displayValue.customSplit('-','+','*','%');
+                // if the last number have a point the user does not add other point
+                if (values[values.length - 1].split('').indexOf('.') != -1) {
+                    return;
+                }
+            }
             value = String(value);
             this.displayValue = this.displayValue == '0' ? value : this.displayValue + value; 
         }
