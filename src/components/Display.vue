@@ -11,7 +11,7 @@ export default {
     },
     computed: {
         displayValueFormated() {
-            return this.displayValue.replace('*','x');
+            return this.displayValue.replace('**','^').replace('*','x');
         }
     },
     updated() {

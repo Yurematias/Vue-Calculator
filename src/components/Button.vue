@@ -1,5 +1,12 @@
 <template>
-    <button :class="{operation, clear, number, symbol, result}" class="button">{{value}}</button>
+    <div>
+        <a href="http://github.com/yurematias" v-if="github">
+            <button class="button github-btn">
+                <img src="../assets/github-icon.png">
+            </button>
+        </a>
+        <button v-else :class="{operation, clear, number, symbol, result}" class="button">{{value}}</button>
+    </div>
 </template>
 
 <script>
@@ -10,8 +17,9 @@ export default {
         number: Boolean,
         symbol: Boolean,
         result: Boolean,
+        github: Boolean,
         value: [String, Number]
-    }
+    }, 
 }
 </script>
 
@@ -34,10 +42,7 @@ export default {
         filter: brightness(120%);
         border-color: rgba(255, 255, 255, 0.527)
     }
-    .number{
-        background-color: #161638;
-    }
-    .symbol{
+    .number, .symbol, .github-btn{
         background-color: #161638;
     }
     .clear{
