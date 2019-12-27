@@ -87,10 +87,12 @@ export default {
             }
         },
         havePointInLastNumber() {
-            // using the split custom method that are created in beforeCreate lifecycle method
-            let values = this.displayValue.customSplit('-','+','*','%','/');
-            // if the last number have a point the user can´t add other point
-            return (values[values.length - 1].split('').indexOf('.') != -1) 
+            // return a array with the elements of the string separated by the parameters passed below
+            let numbersOfDisplay = this.displayValue.customSplit('-','+','*','%','/');
+            let lastDisplayNumber = numbersOfDisplay[numbersOfDisplay.length - 1];
+
+            // if the last number includes a point the user can´t add other point
+            return (lastDisplayNumber.includes('.')); 
         },
         addDigit(value) {
             value = String(value);
