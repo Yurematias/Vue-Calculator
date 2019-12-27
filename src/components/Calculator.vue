@@ -27,7 +27,7 @@
                 <Button symbol value="%" v-on:click.native="addDigit('%')" />
                 <Button number :value="0" v-on:click.native="addDigit(0)" />
                 <Button symbol value="." v-on:click.native="addDigit('.')" />
-                <Button result value="=" />
+                <Button result value="=" v-on:click.native="showResult" />
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@ export default {
         },
         addDigit(value) {
             value = String(value);
-            // if the lastNumber have is isOverwritable and the number pressed is a sybol
+            // if the lastNumber is isOverwritable and the number pressed is a sybol
             // or if the display current number is a zero and the number pressed is not a symbol
             if ((this.isOverridable() && this.isSymbol(value)) || (this.displayValue == '0' && !this.isSymbol(value))) {
                 this.overrideLastNumber(value);    
@@ -99,6 +99,9 @@ export default {
                }
             }
             this.displayValue += value;
+        }, 
+        showResult() {
+            this.displayValue = String(eval(this.displayValue));
         }
     }
 }
