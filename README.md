@@ -1,5 +1,7 @@
 # vue-calculator
 
+![CalculadoraVue](src/assets/github-icon.png)
+
 ## Project setup
 ```
 npm install
