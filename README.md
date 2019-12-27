@@ -1,6 +1,6 @@
 # vue-calculator
 
-![CalculadoraVue](src/assets/github-icon.png)
+![CalculadoraVue](src/assets/vue-calculator.png)
 
 ## Project setup
 ```
