@@ -61,17 +61,44 @@ export default {
         clear() {
             this.displayValue = '0';
         },
-        addDigit(value) {
-            if (value == '.') {
-                // using the split custom method that are created in beforeCreate lifecycle method
-                let values = this.displayValue.customSplit('-','+','*','%');
-                // if the last number have a point the user does not add other point
-                if (values[values.length - 1].split('').indexOf('.') != -1) {
-                    return;
+        isOverridable() {
+            let lastDisplayNumber = this.displayValue.split('')[this.displayValue.length - 1];
+            return (this.isSymbol(lastDisplayNumber));
+        },
+        isSymbol(value) {
+            let symbols = ['.','*','+','-','%','/'];
+            for (const symbol of symbols) {
+                if (value == symbol) {
+                    return true;
                 }
             }
+            return false;
+        },
+        overrideLastNumber(value) {
+            this.displayValue = this.displayValue.split('');
+            this.displayValue[this.displayValue.length - 1] = value;
+            this.displayValue = this.displayValue.join('');
+        },
+        havePointInLastNumber() {
+            // using the split custom method that are created in beforeCreate lifecycle method
+            let values = this.displayValue.customSplit('-','+','*','%','/');
+            // if the last number have a point the user can´t add other point
+            return (values[values.length - 1].split('').indexOf('.') != -1) 
+        },
+        addDigit(value) {
             value = String(value);
-            this.displayValue = this.displayValue == '0' ? value : this.displayValue + value; 
+            // if the lastNumber have is isOverwritable and the number pressed is a sybol
+            // or if the display current number is a zero and the number pressed is not a symbol
+            if ((this.isOverridable() && this.isSymbol(value)) || (this.displayValue == '0' && !this.isSymbol(value))) {
+                this.overrideLastNumber(value);    
+                return;
+            }
+            if (value == '.') {
+               if (this.havePointInLastNumber()) {
+                   return;
+               }
+            }
+            this.displayValue += value;
         }
     }
 }
